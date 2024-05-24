@@ -65,13 +65,15 @@ var arcaneMachinistSubclassObj = {
       name: "Arcane Overdrive",
       source: ["DC:AM", 1],
       minlevel: 9,
-      description: "At 9th level, your constructs gain the ability to enter Arcane Overdrive. As a Action, you can expend a spell slot to activate this ability. While in Arcane Overdrive, your constructs can perform Arcane Overdrive actions by consuming a spell slot."
+      description: "At 9th level, your constructs gain the ability to enter Arcane Overdrive. As a Action, you can activate this ability, making your contsruct go into Arcane Overdrive. While in Arcane Overdrive, your constructs can perform evolved actions by consuming a spell slot. (In Spell Sheet)",
+      action: [["action", ""]],
+      tooltip: "As a Action, you can activate this ability, making your contsruct go into Arcane Overdrive. While in Arcane Overdrive, your constructs can perform evolved actions by consuming a spell slot. (In Spell Sheet)",	
     },
     "subclassfeature11": {
       name: "Enhanced Arcenal",
       source: ["DC:AM", 1],
       minlevel: 11,
-      description: "All Arcane Construct actions gain an aditional die to their rolls."
+      description: "at level 11, All Arcane Construct actions gain an aditional die to their rolls."
     },
     "subclassfeature15": {
       name: "Arcane Reverb",
@@ -86,7 +88,7 @@ var arcaneMachinistSubclassObj = {
       description: "Once per long rest, and after 3 turns, your construct can revive from the dead.",
       action : [["reaction", ""]],
       usages: "1",
-      recovery: "Long Rest",
+      recovery: "LR",
     },
     "subclassfeature17": {
       name: "Masterwork Construct",
@@ -100,12 +102,8 @@ var arcaneMachinistSubclassObj = {
 // Adding Arcane Machinist subclass to the character sheet
 AddSubClass("artificer", "arcane machinist", arcaneMachinistSubclassObj);
 
-AddAction("Construct - Arcane Overdrive", {
-  name: "Arcane Overdrive",
-  description: "Consumes spell slot to activate Evolved Actions",
-  tooltip: "Consumes spell slot to activate Evolved Actions",
-});
-CreatureList["arcane construct"] = {
+creaturesAdd : [["arcane construct"]],
+CreatureOptions = [{
   name: "Arcane Construct",
 	nameMenu : "Companion (Arcane Machinist class feature)",
 	nameTooltip : "the Arcane Machinist Companion class feature",
@@ -254,7 +252,7 @@ CreatureList["arcane construct"] = {
       minlevel: 9,
     },
   ]
-};
+}];
 
 // Adding spells for evolved actions to the spell sheet
 SpellsList["evolved flamethrower"] = {
