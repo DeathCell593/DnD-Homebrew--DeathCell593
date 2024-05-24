@@ -22,11 +22,11 @@ if (sheetVersion < 13001007) {
 var iFileName = "all_WotC_pub+UA.js";
 RequiredSheetVersion("13.1.7");
 
-SourceList["NB2:AM"] = {
+SourceList["DC:AM"] = {
   name: "Artificer Specialization: Arcane Machinist",
   abbreviation: "DC:AM",
   group: "Homebrew",
-  date: "2023/08/08",
+  date: "2024/05/23",
 };
 
 var arcaneMachinistSubclassObj = {
@@ -39,88 +39,66 @@ var arcaneMachinistSubclassObj = {
       name: "Tool proficiency",
       source: ["DC:AM", 1],
       minlevel: 3,
-      description: "Proficient with Tinker's tools",
-      toolProf: ["Tinker's tools"],
+      description: "Proficient with Smith's tools",
+      toolProf: ["Smith's tools"],
       spellcastingExtra: ["shield", "identify", "heat metal", "shatter", "fireball", "glyph of warding", "fabricate", "dimention door", "wall of force", "bigby's hand"],
     },
     "subclassfeature3.1": {
       name: "Arcane Construct Companion",
       source: ["DC:AM", 1],
       minlevel: 3,
-      description: "Starting at 3rd level, you learn how to create an arcane construct companion. This companion aids you in combat and other tasks, growing in power as you do. At level 5, 9, and 15, it will increase in power, unlocking new abilities and things to aid you in all scenarios."
+      description: "Starting at 3rd level, you learn how to create an arcane construct companion. This companion aids you in combat and other tasks, growing in power as you do. At level 5, 11, and 17, it will increase in power, unlocking new abilities and things to aid you in all scenarios."
     },
     "subclassfeature5": {
       name: "Arcane Runes",
       source: ["DC:AM", 1],
       minlevel: 5,
-      description: "At 5th level, you learn how to inscribe arcane runes on your constructs, enhancing their abilities. Your constructs gain advantage on saving throws against spells and other magical effects."
+      description: "At 5th level, you learn how to inscribe arcane runes on your constructs, enhancing their abilities. Your constructs gain an extra dice to all rolls"
     },
     "subclassfeature9": {
-      name: "Enhanced Arcenal",
-      source: ["DC:AM", 1],
-      minlevel: 9,
-      description: "All Arcane Construct actions gain an aditional die to their rolls."
-    },
-    "subclassfeature9.1": {
       name: "Self-Destruct",
       source: ["DC:AM", 1],
       minlevel: 9,
-      description: "At 9th level, your constructs gain the ability to self-destruct. As an action, your construct can self-destruct, causing an explosion in a 20-foot radius. Each creature in that area must make a Dexterity saving throw against a DC of 8 + your proficiency bonus + your Intelligence modifier, taking 3d8 force damage on a failed save, or half as much damage on a successful one. After using this ability, the construct is destroyed."
+      description: "At level 9, As an action, your construct can self-destruct, causing an explosion in a 20-foot radius. Each creature in that area must make a Dex save against a DC of 8 + your PB + your Intmod, taking 3d8 force damage on a failed save, or half damage on a successful one. On use, the construct is destroyed."
     },
-    "subclassfeature9.2": {
+    "subclassfeature9.1": {
       name: "Arcane Overdrive",
       source: ["DC:AM", 1],
       minlevel: 9,
-      description: "At 9th level, your constructs gain the ability to enter Arcane Overdrive. As a bonus action, you can expend a spell slot to activate this ability. While in Arcane Overdrive, your constructs can perform Arcane Overdrive actions by consuming a spell slot."
+      description: "At 9th level, your constructs gain the ability to enter Arcane Overdrive. As a Action, you can expend a spell slot to activate this ability. While in Arcane Overdrive, your constructs can perform Arcane Overdrive actions by consuming a spell slot."
+    },
+    "subclassfeature11": {
+      name: "Enhanced Arcenal",
+      source: ["DC:AM", 1],
+      minlevel: 11,
+      description: "All Arcane Construct actions gain an aditional die to their rolls."
     },
     "subclassfeature15": {
-      name: "Masterwork Construct",
-      source: ["DC:AM", 1],
-      minlevel: 15,
-      description: "At 15th level, your Arcane Construct reachis its peak. It gains an extra die to all rolls for all actions"
-    },
-    "subclassfeature15.1": {
       name: "Arcane Reverb",
       source: ["DC:AM", 1],
       minlevel: 15,
-      description: "Your construct gains a second attack, allowing for even more versitility in combat."
+      description: "Your construct gains a second attack, allowing for even more versitility in combat. also gains the Automatic Reconstruction reaction",
     },
-    "subclassfeature15.2": {
+    "Automatic Reconstruction": {
       name: "Automatic Reconstruction",
       source: ["DC:AM", 1],
       minlevel: 15,
-      description: "Once per long rest, and after 3 turns, your construct can revive from the dead."
+      description: "Once per long rest, and after 3 turns, your construct can revive from the dead.",
+      action : [["reaction", ""]],
+      usages: "1",
+      recovery: "Long Rest",
+    },
+    "subclassfeature17": {
+      name: "Masterwork Construct",
+      source: ["DC:AM", 1],
+      minlevel: 17,
+      description: "At 15th level, your Arcane Construct reachis its peak. It gains an extra die to all rolls for all actions"
     }
   }
 };
 
 // Adding Arcane Machinist subclass to the character sheet
 AddSubClass("artificer", "arcane machinist", arcaneMachinistSubclassObj);
-
-// Adding player actions for Arcane Construct's abilities
-AddAction("Construct - Repulsion Field", {
-  name: "Repulsion Field",
-  description: "Str save, DC 12, range 10-ft radius, 1d10 force damage, pushes 10 ft on fail (half damage and no push on success)",
-  tooltip: "Str save, DC 12, range 10-ft radius, 1d10 force damage, pushes 10 ft on fail (half damage and no push on success)",
-});
-
-AddAction("Construct - Healing Station", {
-  name: "Healing Station",
-  description: "Restores 2d6 HP to allies within 10-ft radius",
-  tooltip: "Restores 2d6 HP to allies within 10-ft radius",
-});
-
-AddAction("Construct - Protector", {
-  name: "Protector",
-  description: "Grants 1d8 + PB temp HP to self and one ally within 30 ft",
-  tooltip: "Grants 1d8 + PB temp HP to self and one ally within 30 ft",
-});
-
-AddAction("Construct - Self-Destruct", {
-  name: "Self-Destruct",
-  description: "Dex save, DC 8 + PB + Int mod, range 20-ft radius, 3d8 force damage (half on save), destroys construct",
-  tooltip: "Dex save, DC 8 + PB + Int mod, range 20-ft radius, 3d8 force damage (half on save), destroys construct",
-});
 
 AddAction("Construct - Arcane Overdrive", {
   name: "Arcane Overdrive",
@@ -202,48 +180,76 @@ CreatureList["arcane construct"] = {
 }],
   attacks: [{
       name: "Flamethrower",
-      damage: [2, 8, "fire"],
+      damage: ["Q", 8, "fire"],
       range: "15-ft cone",
       ability: 2,
       dc: true,
       abilitytodamage: false,
-      description: "Dex save, DC 14, range 15 ft cone, 2d8 fire damage (save for half)",
+      description: "Dex save (half damage),",
       minlevel: 3,
-      calcChanges: {
-        atkAdd: ["if (classes.known.artificer && classes.known.artificer.level >= 5) {fields.Description += ' 3d8 fire damage'; }"],
-        atkAdd: ["if (classes.known.artificer && classes.known.artificer.level >= 9) {fields.Description += ' 4d8 fire damage'; }"],
-        atkAdd: ["if (classes.known.artificer && classes.known.artificer.level >= 15) {fields.Description += ' 5d8 fire damage'; }"],
-      }
     },
     {
       name: "Force Ballista",
-      description: "Ranged spell attack, range 120 ft, +6 to hit, 2d8 force damage, pushes target 5 ft",
-      damage: [2, 8, "force"],
+      description: "Ranged spell attack, range 120 ft, pushes target 5 ft",
+      damage: ["C", 8, "force"],
       range: "120 ft",
       ability: 5,
       minlevel: 3,
-			useSpellMod : "artificer",
-      calcChanges: {
-        atkAdd: ["if (classes.known.artificer && classes.known.artificer.level >= 5) {fields.Description += ' 2d8 +5 force damage'; }"],
-        atkAdd: ["if (classes.known.artificer && classes.known.artificer.level >= 9) {fields.Description += ' 3d8 + 5 force damage'; }"],
-        atkAdd: ["if (classes.known.artificer && classes.known.artificer.level >= 15) {fields.Description += ' 4d8 +5 force damage'; }"],
-      }
+      useSpellMod : "artificer",
     },
     {
       name: "Artillery Cannon",
-      damage: [2, 6, "force"],
+      damage: ["Q", 6, "force"],
       range: "60/240 ft",
       ability: 2,
       dc: true,
       abilitytodamage: false,
-      description: "Ranged spell attack, range 60/240 ft, +6 to hit, 2d6 force damage, 10-ft radius",
+      description: "Ranged spell attack, 10-ft radius",
       minlevel: 3,
-      calcChanges: {
-        atkAdd: ["if (classes.known.artificer && classes.known.artificer.level >= 5) {fields.Description += ' 3d6 force damage'; }"],
-        atkAdd: ["if (classes.known.artificer && classes.known.artificer.level >= 9) {fields.Description += ' 4d6 force damage'; }"],
-        atkAdd: ["if (classes.known.artificer && classes.known.artificer.level >= 15) {fields.Description += ' 5d6 force damage'; }"],
-      }
-    }
+    },
+    {
+      name: "Repulsion Field",
+      damage: ["C", 10, "force"],
+      range: "10-ft radius",
+      ability: 2,
+      dc: true,
+      abilitytodamage: false,
+      description: "Strength save, pushed 10 ft (save for no knockback)",
+      minlevel: 3,
+    },
+    {
+      name: "Healing Station",
+      damage: ["Q", 6, "Healing"],
+      range: "10-ft radius",
+      ability: 0,
+      dc: false,
+      useSpellMod : "artificer",
+      abilitytodamage: false,
+      description: "Dex save (Half Damage),",
+      minlevel: 3,
+    },
+    {
+      name: "Protect",
+      damage: ["C", 8, "temp health"],
+      range: "30-ft",
+      ability: 2,
+      dc: false,
+      useSpellMod : "artificer",
+      abilitytodamage: false,
+      description: "Grants 1d8 + int mod temporary hitpoints",
+      minlevel: 3,
+    },
+    {
+      name: "Self-Destruct",
+      damage: ["Q", 10, "force"],
+      range: "20-ft radius",
+      ability: 2,
+      dc: true,
+      abilitytodamage: false,
+      useSpellMod : "artificer",
+      description: "Dex save (half damage), range 20-ft radius, kills Arcane Construct",
+      minlevel: 9,
+    },
   ]
 };
 
@@ -251,20 +257,20 @@ CreatureList["arcane construct"] = {
 SpellsList["evolved flamethrower"] = {
   name: "Evolved Flamethrower",
   classes: ["artificer"],
-  source: ["NB2:AM", 1],
+  source: ["DC:AM", 1],
   level: 3,
   school: "Evoc",
   time: "1 bns",
   range: "60-ft beam",
   components: "V, S",
   duration: "Instantaneous",
-  description: "Dex save, DC 14, range 60 ft beam, 4d8 fire damage (save for half), ignite for 2d8 fire damage per turn until extinguished",
+  description: "Dex save, DC 14, range 60 ft beam, 6d8 fire damage (save for half), ignite for 3d8 fire damage per turn until extinguished",
 };
 
 SpellsList["evolved force ballista"] = {
   name: "Evolved Force Ballista",
   classes: ["artificer"],
-  source: ["NB2:AM", 1],
+  source: ["DC:AM", 1],
   level: 3,
   usespellcastingability: true,
   school: "Evoc",
@@ -272,13 +278,13 @@ SpellsList["evolved force ballista"] = {
   range: "120 ft",
   components: "V, S",
   duration: "Instantaneous",
-  description: "Ranged spell attack, range 120 ft, +8 to hit, 4d8 force damage plus INT mod, pushes target 10 ft",
+  description: "Ranged spell attack, range 120 ft, 8d8 force damage plus INT mod, pushes target 10 ft",
 };
 
 SpellsList["evolved artillery cannon"] = {
   name: "Evolved Artillery Cannon",
   classes: ["artificer"],
-  source: ["NB2:AM", 1],
+  source: ["DC:AM", 1],
   level: 5,
   school: "Evoc",
   time: "1 bns",
@@ -291,7 +297,7 @@ SpellsList["evolved artillery cannon"] = {
 SpellsList["evolved repulsion field"] = {
   name: "Evolved Repulsion Field",
   classes: ["artificer"],
-  source: ["NB2:AM", 1],
+  source: ["DC:AM", 1],
   level: 4,
   school: "Evoc",
   time: "1 bns",
@@ -304,7 +310,7 @@ SpellsList["evolved repulsion field"] = {
 SpellsList["evolved healing station"] = {
   name: "Evolved Healing Station",
   classes: ["artificer"],
-  source: ["NB2:AM", 1],
+  source: ["DC:AM", 1],
   level: 4,
   school: "Conj",
   time: "1 bns",
@@ -317,7 +323,7 @@ SpellsList["evolved healing station"] = {
 SpellsList["evolved protector"] = {
   name: "Evolved Protector",
   classes: ["artificer"],
-  source: ["NB2:AM", 1],
+  source: ["DC:AM", 1],
   level: 4,
   school: "Abjur",
   time: "1 bns",
