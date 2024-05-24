@@ -207,7 +207,7 @@ CreatureList["Arcane Construct"] = {
       ability: 2,
       dc: true,
       abilitytodamage: false,
-      description: "10-ft radius at explosion",
+      description: "Dex save (half damage), 10-ft radius at explosion",
       minlevel: 3,
     },
     {
