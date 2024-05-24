@@ -152,6 +152,9 @@ CreatureList["Arcane Construct"] = {
 }, {
     name: "Cooldown System",
     description: "The Arcane Construct possesses a cooldown system that governs the usage of its abilities. Each ability has a cooldown period, represented by a number of rounds, during which it cannot be used again after being activated. More detail in notes."
+}, {
+    name: "Shared Initiative",
+    description: "the Arcane Construct shares your initiative count, but it takes its turn immediately after yours.",
   }],
   notes: [{
     name: "Cooldown System continued",
