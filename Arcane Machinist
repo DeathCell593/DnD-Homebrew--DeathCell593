@@ -251,7 +251,7 @@ CreatureList["arcane construct"] = {
       minlevel: 9,
     },
   ]
-}];
+};
 
 // Adding spells for evolved actions to the spell sheet
 SpellsList["evolved flamethrower"] = {
