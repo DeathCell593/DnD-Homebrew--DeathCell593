@@ -114,8 +114,8 @@ CreatureList["arcane construct"] = {
   size: 4, // Small
   type: "Construct",
   alignment: "Neutral",
-  ac: 18, // 15 + 3
-  hp: 7 + (7 * 3), 
+  ac: 16, // 12 + 4
+  hp: 3 + (7 * 3), 
 	calcChanges : {
     hp : function (totalHD, HDobj, prefix) {
       if (!classes.known.artificer) return;
@@ -124,18 +124,18 @@ CreatureList["arcane construct"] = {
 			HDobj.alt.push(1 + intMod + artLvl);
 			HDobj.altStr.push(" = 1 as a base\n + " + intMod + " from its creator's Intelligence modifier\n + " + artLvl + " from its creator's artificer level");
 			}},
-						setAltHp : true,
-						hpForceRecalc : true,
+			setAltHp : true,
+			hpForceRecalc : true,
   hd: ["artLvl", "8"],
 	hdLinked : ["artificer", "8"],
   speed: "30 ft, Fly 30 ft (Hover)",
   challengeRating : "1",
-  scores: [10, 14, 16, 10, 12, 7],
+  scores: [10, 18, 16, 10, 12, 7],
 	attacks : [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2],
   saves: ["", 4, 5, "", 3, ""],
   skills:{
  "perception": 3,
- "stealth": 4,
+ "stealth": 6,
   },
   senses: "darkvision 60 ft.",
   passivePerception: 10,
@@ -177,6 +177,9 @@ CreatureList["arcane construct"] = {
 }, {
     name: "Scout mode",
     description: "you can turn the Arcane Construct into a scout. It loses its ability to use actions and bonus actions, however it is able to stealth around and be attached to other players, acting as a monitor on what is going on. Because of having enhanced senses, it grants advantage on perception checks when attached to someone.",
+}, {
+    name: "All Attacks:",
+    description: "Flamethrower, Force Ballista, Artillery Cannon, Repulsion Field, Healing Station, Protector, Self-Destruct.",
 }],
   attacks: [{
       name: "Flamethrower",
@@ -190,7 +193,7 @@ CreatureList["arcane construct"] = {
     },
     {
       name: "Force Ballista",
-      description: "Ranged spell attack, range 120 ft, pushes target 5 ft",
+      description: "Pushes target 5 ft",
       damage: ["C", 8, "force"],
       range: "120 ft",
       ability: 5,
@@ -204,7 +207,7 @@ CreatureList["arcane construct"] = {
       ability: 2,
       dc: true,
       abilitytodamage: false,
-      description: "Ranged spell attack, 10-ft radius",
+      description: "10-ft radius at explosion",
       minlevel: 3,
     },
     {
@@ -225,18 +228,18 @@ CreatureList["arcane construct"] = {
       dc: false,
       useSpellMod : "artificer",
       abilitytodamage: false,
-      description: "Dex save (Half Damage),",
+      description: "targets all teamates in radius, one time use per long rest",
       minlevel: 3,
     },
     {
       name: "Protect",
-      damage: ["C", 8, "temp health"],
+      damage: ["C", 8, "temp HP"],
       range: "30-ft",
       ability: 2,
       dc: false,
       useSpellMod : "artificer",
-      abilitytodamage: false,
-      description: "Grants 1d8 + int mod temporary hitpoints",
+      abilitytodamage: true,
+      description: "targets yourself and 1 other willing person",
       minlevel: 3,
     },
     {
@@ -247,7 +250,7 @@ CreatureList["arcane construct"] = {
       dc: true,
       abilitytodamage: false,
       useSpellMod : "artificer",
-      description: "Dex save (half damage), range 20-ft radius, kills Arcane Construct",
+      description: "Dex save (half damage), kills Arcane Construct",
       minlevel: 9,
     },
   ]
