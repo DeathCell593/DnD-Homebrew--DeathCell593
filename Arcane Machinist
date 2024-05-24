@@ -47,7 +47,8 @@ var arcaneMachinistSubclassObj = {
       name: "Arcane Construct Companion",
       source: ["DC:AM", 1],
       minlevel: 3,
-      description: "Starting at 3rd level, you learn how to create an arcane construct companion. This companion aids you in combat and other tasks, growing in power as you do. At level 5, 11, and 17, it will increase in power, unlocking new abilities and things to aid you in all scenarios."
+      description: "Starting at 3rd level, you learn how to create an arcane construct companion. This companion aids you in combat and other tasks, growing in power as you do. At level 5, 11, and 17, it will increase in power, unlocking new abilities and things to aid you in all scenarios.",
+      creaturesAdd : [["Arcane Construct", true]],
     },
     "subclassfeature5": {
       name: "Arcane Runes",
@@ -102,7 +103,7 @@ var arcaneMachinistSubclassObj = {
 // Adding Arcane Machinist subclass to the character sheet
 AddSubClass("artificer", "arcane machinist", arcaneMachinistSubclassObj);
 
-CreatureList["arcane construct"] = {
+CreatureList["Arcane Construct"] = {
   name: "Arcane Construct",
 	nameMenu : "Companion (Arcane Machinist class feature)",
 	nameTooltip : "the Arcane Machinist Companion class feature",
