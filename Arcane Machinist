@@ -102,8 +102,7 @@ var arcaneMachinistSubclassObj = {
 // Adding Arcane Machinist subclass to the character sheet
 AddSubClass("artificer", "arcane machinist", arcaneMachinistSubclassObj);
 
-creaturesAdd : [["arcane construct"]],
-CreatureOptions = [{
+CreatureList["arcane construct"] = {
   name: "Arcane Construct",
 	nameMenu : "Companion (Arcane Machinist class feature)",
 	nameTooltip : "the Arcane Machinist Companion class feature",
