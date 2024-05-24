@@ -129,7 +129,7 @@ CreatureList["Arcane Construct"] = {
   challengeRating : "1",
   scores: [10, 18, 16, 10, 12, 7],
 	attacks : [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2],
-  saves: ["", 4, 5, "", 3, ""],
+  saves: ["", 6, 5, "", 3, ""],
   skills:{
  "perception": 3,
  "stealth": 6,
