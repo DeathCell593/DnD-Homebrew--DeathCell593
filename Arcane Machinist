@@ -109,7 +109,7 @@ CreatureList["Arcane Construct"] = {
 	nameTooltip : "the Arcane Machinist Companion class feature",
   source: ["DC:AM", 1],
 	defaultExcluded : false,
-  size: 4, // Small
+  size: 3, // Medium
   type: "Construct",
   alignment: "Neutral",
   ac: 16, // 12 + 4 
