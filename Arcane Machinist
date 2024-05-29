@@ -56,13 +56,15 @@ var arcaneMachinistSubclassObj = {
       minlevel: 5,
       description: "At 5th level, you learn how to inscribe arcane runes on your constructs, enhancing their abilities. Your constructs gain an extra dice to all rolls"
     },
-    "subclassfeature5.1": {
+    "Arcane Overdrive": {
       name: "Arcane Overdrive",
       source: ["DC:AM", 1],
       minlevel: 5,
       description: "At 5th level, your constructs gain the ability to enter Arcane Overdrive. As a Action, you can activate this ability, making your contsruct go into Arcane Overdrive. While in Arcane Overdrive, your constructs can perform evolved actions by consuming a spell slot. (In Spell Sheet)",
-      action: [["action", ""]],
       tooltip: "As a Action, you can activate this ability, making your contsruct go into Arcane Overdrive. While in Arcane Overdrive, your constructs can perform evolved actions by consuming a spell slot. (In Spell Sheet)",	
+      action : [["Action", ""]],
+      usages: "3",
+      recovery: "LR",
     },
     "subclassfeature9": {
       name: "Self-Destruct",
@@ -179,11 +181,11 @@ CreatureList["Arcane Construct"] = {
     description: "you can turn the Arcane Construct into a scout. It loses its ability to use actions and bonus actions, however it is able to stealth around and be attached to other players, acting as a monitor on what is going on. Because of having enhanced senses, it grants advantage on perception checks when attached to someone.",
 }, {
     name: "All Attacks:",
-    description: "Flamethrower, Force Ballista, Artillery Cannon, Repulsion Field, Healing Station, Protector, Self-Destruct.",
+    description: "Gravity Wave, Force Ballista, Artillery Cannon, Repulsion Field, Healing Station, Protector, Self-Destruct.",
 }],
   attacks: [{
-      name: "Flamethrower",
-      damage: ["Q", 8, "fire"],
+      name: "Gravity Wave",
+      damage: ["Q", 8, "Force"],
       range: "15-ft cone",
       ability: 2,
       dc: true,
@@ -257,8 +259,8 @@ CreatureList["Arcane Construct"] = {
 };
 
 // Adding spells for evolved actions to the spell sheet
-SpellsList["evolved flamethrower"] = {
-  name: "Evolved Flamethrower - Inferno Beam",
+SpellsList["evolved gravity wave"] = {
+  name: "Evolved Gravity Wave - Singularity Blast",
   classes: ["artificer"],
   source: ["DC:AM", 1],
   level: 2,
@@ -268,7 +270,7 @@ SpellsList["evolved flamethrower"] = {
   range: "60-ft beam",
   components: "V, S",
   duration: "Instantaneous",
-  description: "5d8 fire damage (save for half), ignite for 2d8 fire damage per turn until extinguished",
+  description: "5d8 Force damage (save for half and avoid prone), Irradiate for 2d8 Force damage per turn until Cured (Action), Knocks prone",
 };
 
 SpellsList["evolved force ballista"] = {
