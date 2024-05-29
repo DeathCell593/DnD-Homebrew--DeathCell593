@@ -41,7 +41,7 @@ var arcaneMachinistSubclassObj = {
       minlevel: 3,
       description: "Proficient with Smith's tools",
       toolProf: ["Smith's tools"],
-      spellcastingExtra: ["shield", "identify", "heat metal", "shatter", "fireball", "glyph of warding", "fabricate", "dimention door", "wall of force", "bigby's hand"],
+      spellcastingExtra: ["magic missile", "magnify gravity", "misty step", "levitate", "pulse wave", "glyph of warding", "fabricate", "gravity sinkhole", "wall of force", "bigby's hand"],
     },
     "subclassfeature3.1": {
       name: "Arcane Construct Companion",
@@ -56,19 +56,19 @@ var arcaneMachinistSubclassObj = {
       minlevel: 5,
       description: "At 5th level, you learn how to inscribe arcane runes on your constructs, enhancing their abilities. Your constructs gain an extra dice to all rolls"
     },
+    "subclassfeature5.1": {
+      name: "Arcane Overdrive",
+      source: ["DC:AM", 1],
+      minlevel: 5,
+      description: "At 5th level, your constructs gain the ability to enter Arcane Overdrive. As a Action, you can activate this ability, making your contsruct go into Arcane Overdrive. While in Arcane Overdrive, your constructs can perform evolved actions by consuming a spell slot. (In Spell Sheet)",
+      action: [["action", ""]],
+      tooltip: "As a Action, you can activate this ability, making your contsruct go into Arcane Overdrive. While in Arcane Overdrive, your constructs can perform evolved actions by consuming a spell slot. (In Spell Sheet)",	
+    },
     "subclassfeature9": {
       name: "Self-Destruct",
       source: ["DC:AM", 1],
       minlevel: 9,
       description: "At level 9, As an action, your construct can self-destruct, causing an explosion in a 20-foot radius. Each creature in that area must make a Dex save against a DC of 8 + your PB + your Intmod, taking 3d8 force damage on a failed save, or half damage on a successful one. On use, the construct is destroyed."
-    },
-    "subclassfeature9.1": {
-      name: "Arcane Overdrive",
-      source: ["DC:AM", 1],
-      minlevel: 9,
-      description: "At 9th level, your constructs gain the ability to enter Arcane Overdrive. As a Action, you can activate this ability, making your contsruct go into Arcane Overdrive. While in Arcane Overdrive, your constructs can perform evolved actions by consuming a spell slot. (In Spell Sheet)",
-      action: [["action", ""]],
-      tooltip: "As a Action, you can activate this ability, making your contsruct go into Arcane Overdrive. While in Arcane Overdrive, your constructs can perform evolved actions by consuming a spell slot. (In Spell Sheet)",	
     },
     "subclassfeature11": {
       name: "Enhanced Arcenal",
@@ -150,15 +150,15 @@ CreatureList["Arcane Construct"] = {
     name: "Evasion", 
     description: "If the Arcane Construct is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, it instead takes no damage if it succeeds on the saving throw, and only half damage if it fails. It can't use this trait if it's incapacitated.",
 }, {
-    name: "Cooldown System",
-    description: "The Arcane Construct possesses a cooldown system that governs the usage of its abilities. Each ability has a cooldown period, represented by a number of rounds, during which it cannot be used again after being activated. More detail in notes."
+    name: "Arcane Synchronization",
+    description: "When the player casts a spell that deals force damage, the construct can add additional force damage to its next attack. (1d4, scales with cantrips)."
 }, {
     name: "Shared Initiative",
     description: "the Arcane Construct shares your initiative count, but it takes its turn immediately after yours.",
   }],
   notes: [{
-    name: "Cooldown System continued",
-    description: "When an ability is activated, its cooldown period begins. The Arcane Construct cannot use that ability again until the cooldown period elapses. The cooldown period is tracked separately for each ability.",
+    name: "Cooldown System",
+    description: "The Arcane Construct possesses a cooldown system that governs the usage of its abilities. Each ability has a cooldown period, represented by a number of rounds, during which it cannot be used again after being activated. When an ability is activated, its cooldown period begins. The Arcane Construct cannot use that ability again until the cooldown period elapses. The cooldown period is tracked separately for each ability.",
 }, {
     name: "Cooldowns",
     description: "",
@@ -193,7 +193,7 @@ CreatureList["Arcane Construct"] = {
     },
     {
       name: "Force Ballista",
-      description: "Pushes target 5 ft",
+      description: "Pushes target 5 ft, Garenteed hit",
       damage: ["C", 8, "force"],
       range: "120 ft",
       ability: 5,
@@ -258,80 +258,83 @@ CreatureList["Arcane Construct"] = {
 
 // Adding spells for evolved actions to the spell sheet
 SpellsList["evolved flamethrower"] = {
-  name: "Evolved Flamethrower",
+  name: "Evolved Flamethrower - Inferno Beam",
   classes: ["artificer"],
   source: ["DC:AM", 1],
-  level: 3,
+  level: 2,
+  save: "Dex",
   school: "Evoc",
   time: "1 bns",
   range: "60-ft beam",
   components: "V, S",
   duration: "Instantaneous",
-  description: "Dex save, DC 14, range 60 ft beam, 6d8 fire damage (save for half), ignite for 3d8 fire damage per turn until extinguished",
+  description: "5d8 fire damage (save for half), ignite for 2d8 fire damage per turn until extinguished",
 };
 
 SpellsList["evolved force ballista"] = {
-  name: "Evolved Force Ballista",
+  name: "Evolved Force Ballista - Impact Missile",
   classes: ["artificer"],
   source: ["DC:AM", 1],
-  level: 3,
+  level: 2,
   usespellcastingability: true,
   school: "Evoc",
   time: "1 bns",
   range: "120 ft",
   components: "V, S",
   duration: "Instantaneous",
-  description: "Ranged spell attack, range 120 ft, 8d8 force damage plus INT mod, pushes target 10 ft",
+  description: "6d8 force damage plus INT mod, pushes target 10 ft, Guaranteed hit, knocked prone",
 };
 
 SpellsList["evolved artillery cannon"] = {
-  name: "Evolved Artillery Cannon",
+  name: "Evolved Artillery Cannon - I.C.A.B.",
   classes: ["artificer"],
   source: ["DC:AM", 1],
-  level: 5,
+  level: 4,
+  save: "Dex",
   school: "Evoc",
   time: "1 bns",
   range: "60/240 ft",
   components: "V, S",
   duration: "Instantaneous",
-  description: "Ranged spell attack, 3 shots, range 60/240 ft, +8 to hit, 5d6 force damage, 30-ft radius",
+  description: "3 shots, 5d6 force damage each, 30-ft radius, knocks prone (Half Damage and avoid prone on success)",
 };
 
 SpellsList["evolved repulsion field"] = {
-  name: "Evolved Repulsion Field",
+  name: "Evolved Repulsion Field - Repulsion Nova",
   classes: ["artificer"],
   source: ["DC:AM", 1],
-  level: 4,
+  level: 3,
+  save: "Str",
   school: "Evoc",
   time: "1 bns",
   range: "Self (20-ft radius)",
   components: "V, S",
   duration: "Instantaneous",
-  description: "Str save, DC 14, range 20-ft radius, 4d10 force damage, pushes 20 ft on fail (half damage and no push on success)",
+  description: "4d10 force damage, pushes 20 ft on fail (half damage and no push on success)",
 };
 
 SpellsList["evolved healing station"] = {
-  name: "Evolved Healing Station",
+  name: "Evolved Healing Station - Revitalizing Aura",
   classes: ["artificer"],
   source: ["DC:AM", 1],
-  level: 4,
+  level: 3,
   school: "Conj",
   time: "1 bns",
   range: "Self (10-ft radius)",
   components: "V, S",
   duration: "Instantaneous",
-  description: "Restores 4d6 HP to allies within 10-ft radius, revive if dead.",
+  description: "Restores 4d6 HP to allies within 10-ft radius, revive recently dead (3 turns).",
 };
 
 SpellsList["evolved protector"] = {
-  name: "Evolved Protector",
+  name: "Evolved Protector - Fortification Barrier",
   classes: ["artificer"],
   source: ["DC:AM", 1],
-  level: 4,
+  level: 3,
   school: "Abjur",
   time: "1 bns",
   range: "30 ft",
   components: "V, S",
   duration: "Instantaneous",
-  description: "Grants 4d8 + PB temp HP to self and all allies within 30 ft",
+  description: "Grants 4d8 + Int mod temp HP to self and all allies within 30 ft",
 };
