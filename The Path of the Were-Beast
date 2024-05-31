@@ -1,0 +1,71 @@
+ClassSubList["path of the were-beast"] = {
+    regExpSearch: /^(?=.*(were|beast)).*$/i,
+    subname: "Path of the Were-Beast",
+    source: ["HB", 0],
+    features: {
+        "subclassfeature3": {
+            name: "Form of the Beast",
+            source: ["HB", 0],
+            minlevel: 3,
+            description: desc([
+                "I can transform and gain one natural melee weapon: bite, claws, or tail",
+                "Bite: 1d8 piercing, regain HP equal to Con mod once per turn",
+                "Claws: 1d6 slashing, additional claw attack",
+                "Tail: 1d12 piercing, reach property"
+            ]),
+            additional: ["bite, claws, or tail"],
+            action: [["bonus action", " (transform)"]],
+        },
+        "subclassfeature6": {
+            name: "Bestial Soul",
+            source: ["HB", 0],
+            minlevel: 6,
+            description: desc([
+                "Choose a benefit after a short/long rest: climbing speed, swimming speed, or jump distance",
+                "Climb: Speed equal to walking speed, climb difficult surfaces",
+                "Swim: Speed equal to walking speed, breathe underwater",
+                "Jump: Increase distance by Strength mod in feet"
+            ]),
+            choices: ["Climbing", "Swimming", "Jumping"],
+            "climbing": {
+                name: "Bestial Soul: Climbing",
+                description: desc([
+                    "I have a climbing speed equal to my walking speed",
+                    "I can climb difficult surfaces, including upside down on ceilings"
+                ]),
+            },
+            "swimming": {
+                name: "Bestial Soul: Swimming",
+                description: desc([
+                    "I have a swimming speed equal to my walking speed",
+                    "I can breathe underwater"
+                ]),
+            },
+            "jumping": {
+                name: "Bestial Soul: Jumping",
+                description: desc([
+                    "My jump distance is increased by a number of feet equal to my Strength modifier"
+                ]),
+            },
+        },
+        "subclassfeature10": {
+            name: "Infectious Fury",
+            source: ["HB", 0],
+            minlevel: 10,
+            description: desc([
+                "When I hit a creature with my natural weapons, it must make a Wis save (DC 8 + prof bonus + Con mod)",
+                "On a fail, it uses its reaction to attack another creature or takes 2d12 psychic damage"
+            ]),
+        },
+        "subclassfeature14": {
+            name: "Call the Hunt",
+            source: ["HB", 0],
+            minlevel: 14,
+            description: desc([
+                "As a bonus action while raging, grant myself and up to 10 creatures temporary HP",
+                "Temp HP = 5 + my barbarian level, bonus to attack rolls and saves equal to my Con mod"
+            ]),
+            action: [["bonus action", " (while raging)"]],
+        }
+    }
+};
