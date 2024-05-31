@@ -1,56 +1,296 @@
-ClassSubList["path of the were-beast"] = {
-    regExpSearch: /^(?=.*(were|beast)).*$/i,
-    subname: "Path of the Were-Beast",
-    source: ["HB", 0],
+/*	-WHAT IS THIS?-
+	This file adds optional material to "MPMB's Character Record Sheet" found at https://flapkan.com/mpmb/charsheets
+	Import this file using the "Add Extra Materials" bookmark.
+	-KEEP IN MIND-
+	It is recommended to enter the code in a fresh sheet before adding any other information (i.e. before making your character with it).
+*/
+
+/*  -INFORMATION-
+	Subject:    Barbarian Specialization: Path of the Were-Beast
+	Effect:     Adds the Barbarian Specialization Path of the Were-Beast as a selectable subclass
+	Code by:	u/DeathCell593
+    Author:     DeathCell593
+	Date:		2024-05-31 (sheet v13.1.17)
+*/
+
+var iFileName = "Barbarian Specialization - Path of the WereBeast by [Your Name].js";
+
+if (sheetVersion < 13001007) {
+  throw "This script was made for a newer version of the sheet (v13.1.7). Please use the latest version and try again.\nYou can get the latest version at www.flapkan.com.";
+}
+
+var iFileName = "all_WotC_pub+UA.js";
+RequiredSheetVersion("13.1.7");
+
+SourceList["DC:WB"] = {
+  name: "Barbarian Specialization: Path of the Were-Beast",
+  abbreviation: "DC:WB",
+  group: "Homebrew",
+  date: "2024/05/31",
+};
+
+AddSubClass("barbarian", "Path of the WereBeast", PathoftheWereBeastSubclassObj);
+
+var PathoftheWereBeastSubclassObj = {
+  regExpSearch: /^(?=.*(were|beast)).*$/i,
+  subname: "Path of the Were-Beast",
+  fullname: "Path of the Were-Beast",
+  source: ["DC:WB", 1],
     features: {
         "subclassfeature3": {
-            name: "Form of the Beast",
-            source: ["HB", 0],
+            name: "Were-Beast Form",
+            source: ["HB", 1],
             minlevel: 3,
             description: desc([
-                "I can transform and gain one natural melee weapon: bite, claws, or tail",
-                "Bite: 1d8 piercing, regain HP equal to Con mod once per turn",
-                "Claws: 1d6 slashing, additional claw attack",
-                "Tail: 1d12 piercing, reach property"
+                "Use a bonus action to morph into your were-beast form, gaining +1 to AC and weapon damage rolls",
+                "You have an unarmed bite weapon dealing 1d4 + Str mod piercing damage, no free hands needed",
+                "You count as both a Beast and your normal creature type",
+                "Your Were-Beast Form lasts for 2 hours, increasing at higher levels",
+                "You can enter a rage as part of the same bonus action when transforming",
+                "You cannot transform again until you finish a long rest",
+                "Choose one of the following were-beasts: Bear, Boar, Cobra, Crocodile, Rat, Shark, Tiger, or Wolf"
             ]),
-            additional: ["bite, claws, or tail"],
+            additional: ["Bear", "Boar", "Cobra", "Crocodile", "Rat", "Shark", "Tiger", "Wolf"],
             action: [["bonus action", " (transform)"]],
+            choices: ["Bear", "Boar", "Cobra", "Crocodile", "Rat", "Shark", "Tiger", "Wolf"],
+            "bear": {
+                name: "Were-Beast Form: Bear",
+                description: desc([
+                    "Advantage on Strength ability checks, additional +1 to AC and weapon damage rolls",
+                    "While raging, gain temp HP equal to rage damage bonus at the start of each turn"
+                ]),
+                extraAC: 1,
+                calcChanges: {
+                    atkAdd: [
+                        function (fields, v) {
+                            if (v.isMeleeWeapon) fields.Description += (fields.Description ? '; ' : '') + '+1 to damage';
+                        },
+                        "+1 to weapon damage rolls"
+                    ]
+                },
+            },
+            "boar": {
+                name: "Were-Beast Form: Boar",
+                description: desc([
+                    "If I move 15+ ft straight towards a target and hit with a melee attack, it takes +1d6 piercing damage",
+                    "+2d6 if raging, and the target must succeed on a Strength save or be knocked prone"
+                ]),
+                extraDmg: 1,
+                extraDmgType: "piercing",
+                extraDmgRaging: 2,
+                calcChanges: {
+                    atkAdd: [
+                        function (fields, v) {
+                            if (v.isMeleeWeapon && v.thisWeapon[1] === "Boar") fields.Description += (fields.Description ? '; ' : '') + '+1d6 piercing damage if moved 15+ ft straight towards target';
+                        },
+                        "+1d6 piercing damage if moved 15+ ft straight towards target"
+                    ]
+                },
+            },
+            "cobra": {
+                name: "Were-Beast Form: Cobra",
+                description: desc([
+                    "Bite reach increases by 5 ft, target makes Con save on hit or takes 2d4 poison damage",
+                    "While raging, can make a bite attack as a bonus action"
+                ]),
+                extraDmg: 2,
+                extraDmgType: "poison",
+                calcChanges: {
+                    atkAdd: [
+                        function (fields, v) {
+                            if (v.isUnarmedStrike) fields.Description += (fields.Description ? '; ' : '') + 'reach +5 ft; target must make Con save or take 2d4 poison damage';
+                        },
+                        "Bite reach increases by 5 ft; target must make Con save or take 2d4 poison damage"
+                    ]
+                },
+            },
+            "crocodile": {
+                name: "Were-Beast Form: Crocodile",
+                description: desc([
+                    "Swim speed equals walking speed, hold breath 10 minutes longer, bite weapon die increases to 1d10",
+                    "On hit, target is grappled; while raging, advantage on melee attacks against grappled targets"
+                ]),
+                swimSpeed: true,
+                extraDmgDie: [1, 10],
+                calcChanges: {
+                    atkAdd: [
+                        function (fields, v) {
+                            if (v.isUnarmedStrike) fields.Description += (fields.Description ? '; ' : '') + '1d10 damage; grapples target on hit';
+                        },
+                        "Bite weapon die increases to 1d10; grapples target on hit"
+                    ]
+                },
+            },
+            "rat": {
+                name: "Were-Beast Form: Rat",
+                description: desc([
+                    "Climb speed equals walking speed, can Hide or Disengage as a bonus action",
+                    "While raging, speed increases by 10 ft and advantage on Dex (Stealth) checks"
+                ]),
+                climbSpeed: true,
+                extraSpeed: 10,
+                calcChanges: {
+                    atkAdd: [
+                        function (fields, v) {
+                            if (v.isMeleeWeapon) fields.Description += (fields.Description ? '; ' : '') + 'Hide or Disengage as a bonus action';
+                        },
+                        "Can Hide or Disengage as a bonus action"
+                    ]
+                },
+            },
+            "shark": {
+                name: "Were-Beast Form: Shark",
+                description: desc([
+                    "Swim speed equals walking speed, breathe underwater, blindsight 5 ft (30 ft in water)",
+                    "While raging, advantage on melee attacks against creatures with blood that aren't at full HP"
+                ]),
+                swimSpeed: true,
+                calcChanges: {
+                    atkAdd: [
+                        function (fields, v) {
+                            if (v.isMeleeWeapon) fields.Description += (fields.Description ? '; ' : '') + 'advantage on melee attacks against creatures with blood that aren’t at full HP';
+                        },
+                        "Advantage on melee attacks against creatures with blood that aren’t at full HP"
+                    ]
+                },
+            },
+            "tiger": {
+                name: "Were-Beast Form: Tiger",
+                description: desc([
+                    "Jumping distance tripled, if move 15+ ft straight towards a target and hit with a melee attack, it must make a Strength save or be knocked prone",
+                    "While raging, if knock a target prone, can use bonus action to make a bite attack against the target"
+                ]),
+                extraJump: 3,
+                calcChanges: {
+                    atkAdd: [
+                        function (fields, v) {
+                            if (v.isMeleeWeapon && v.thisWeapon[1] === "Tiger") fields.Description += (fields.Description ? '; ' : '') + 'if move 15+ ft straight towards target, target must make Str save or be knocked prone';
+                        },
+                        "If move 15+ ft straight towards target, target must make Str save or be knocked prone"
+                    ]
+                },
+            },
+            "wolf": {
+                name: "Were-Beast Form: Wolf",
+                description: desc([
+                    "Speed increases by 10 ft",
+                    "While raging, advantage on attack rolls against creatures if ally is within 5 ft of target and isn't incapacitated"
+                ]),
+                extraSpeed: 10,
+                calcChanges: {
+                    atkAdd: [
+                        function (fields, v) {
+                            if (v.isMeleeWeapon) fields.Description += (fields.Description ? '; ' : '') + 'advantage on attack rolls if ally is within 5 ft of target and isn’t incapacitated';
+                        },
+                        "Advantage on attack rolls if ally is within 5 ft of target and isn’t incapacitated"
+                    ]
+                },
+            }
         },
-        "subclassfeature6": {
-            name: "Bestial Soul",
-            source: ["HB", 0],
-            minlevel: 6,
+"subclassfeature6": {
+    name: "Bestial Gifts",
+    source: ["DC:WB", 1],
+    minlevel: 6,
+    description: desc([
+        "Use an action to transform into a full beast based on your were-beast choice",
+        "Transformation lasts up to 10 minutes or until reduced to 0 HP, or choose to end it as an action",
+        "You can only transform once per long rest, increasing to twice at 14th level and unlimited at 20th level",
+        "You retain your HP, AC, ability scores, special senses, and are size Large regardless of the beast's size",
+        "For Dexterity (Stealth) checks, use the beast's Dexterity score",
+        "Gain latent abilities based on your were-beast choice"
+    ]),
+    usages: 1,
+    recovery: "long rest",
+    action: [["action", " (transform)"]],
+    additional: levels.map(n => (n < 14 ? "" : n < 20 ? "2 per long rest" : "unlimited")),
+    transformation: {
+        "Bear": {
+            name: "Full Beast Form: Brown Bear",
+            description: "You can transform into a Brown Bear. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the bear's Dexterity score."
+        },
+        "Boar": {
+            name: "Full Beast Form: Giant Boar",
+            description: "You can transform into a Giant Boar. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the boar's Dexterity score."
+        },
+        "Cobra": {
+            name: "Full Beast Form: Giant Poisonous Snake",
+            description: "You can transform into a Giant Poisonous Snake. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the snake's Dexterity score."
+        },
+        "Crocodile": {
+            name: "Full Beast Form: Crocodile",
+            description: "You can transform into a Crocodile. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the crocodile's Dexterity score."
+        },
+        "Rat": {
+            name: "Full Beast Form: Giant Badger",
+            description: "You can transform into a Giant Badger. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the badger's Dexterity score."
+        },
+        "Shark": {
+            name: "Full Beast Form: Hunter Shark",
+            description: "You can transform into a Hunter Shark. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the shark's Dexterity score."
+        },
+        "Tiger": {
+            name: "Full Beast Form: Tiger",
+            description: "You can transform into a Tiger. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the tiger's Dexterity score."
+        },
+        "Wolf": {
+            name: "Full Beast Form: Wolf",
+            description: "You can transform into a Wolf. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the wolf's Dexterity score."
+        }
+    },
+    bestialGifts: {
+        "Hunter Senses": {
+            name: "Hunter Senses",
             description: desc([
-                "Choose a benefit after a short/long rest: climbing speed, swimming speed, or jump distance",
-                "Climb: Speed equal to walking speed, climb difficult surfaces",
-                "Swim: Speed equal to walking speed, breathe underwater",
-                "Jump: Increase distance by Strength mod in feet"
-            ]),
-            choices: ["Climbing", "Swimming", "Jumping"],
-            "climbing": {
-                name: "Bestial Soul: Climbing",
-                description: desc([
-                    "I have a climbing speed equal to my walking speed",
-                    "I can climb difficult surfaces, including upside down on ceilings"
-                ]),
-            },
-            "swimming": {
-                name: "Bestial Soul: Swimming",
-                description: desc([
-                    "I have a swimming speed equal to my walking speed",
-                    "I can breathe underwater"
-                ]),
-            },
-            "jumping": {
-                name: "Bestial Soul: Jumping",
-                description: desc([
-                    "My jump distance is increased by a number of feet equal to my Strength modifier"
-                ]),
-            },
+                "Gain proficiency in Perception or Survival",
+                "Memorize a creature's scent forever by sniffing it for at least 1 minute",
+                "Always recognize the smell of any creature whose scent you've memorized",
+                "Advantage on Wisdom ability checks that rely on taste or smell"
+            ])
         },
+        "Lurker Instincts": {
+            name: "Lurker Instincts",
+            description: desc([
+                "Gain proficiency in Sleight of Hand or Stealth",
+                "Never slow travel pace to move stealthily",
+                "Can perform an activity while traveling without stopping watching for danger",
+                "Gain darkvision that extends to 60 feet"
+            ])
+        }
+    },
+    choices: ["Hunter Senses", "Lurker Instincts"],
+    "hunter senses": {
+        name: "Hunter Senses",
+        description: "Gain proficiency in Perception or Survival, memorize a creature's scent forever by sniffing it for at least 1 minute, always recognize the smell of any creature whose scent you've memorized, and have advantage on Wisdom ability checks that rely on taste or smell.",
+        skills: ["Perception", "Survival"],
+        additional: ["Perception", "Survival"],
+        calcChanges: {
+            skillAdd: [
+                function (fields, v) {
+                    if (v.thisSkill === "Perception" || v.thisSkill === "Survival") fields.prof = true;
+                },
+                "Gain proficiency in Perception or Survival."
+            ]
+        }
+    },
+    "lurker instincts": {
+        name: "Lurker Instincts",
+        description: "Gain proficiency in Sleight of Hand or Stealth, never have to slow travel pace to move stealthily, can perform an activity while traveling without stopping watching for danger, and gain darkvision that extends to 60 feet.",
+        skills: ["Sleight of Hand", "Stealth"],
+        additional: ["Sleight of Hand", "Stealth"],
+        calcChanges: {
+            skillAdd: [
+                function (fields, v) {
+                    if (v.thisSkill === "Sleight of Hand" || v.thisSkill === "Stealth") fields.prof = true;
+                },
+                "Gain proficiency in Sleight of Hand or Stealth."
+            ]
+        },
+        vision: [["Darkvision", 60]]
+    }
+},
         "subclassfeature10": {
             name: "Infectious Fury",
-            source: ["HB", 0],
+            source: ["DC:WB", 1],
             minlevel: 10,
             description: desc([
                 "When I hit a creature with my natural weapons, it must make a Wis save (DC 8 + prof bonus + Con mod)",
@@ -59,7 +299,7 @@ ClassSubList["path of the were-beast"] = {
         },
         "subclassfeature14": {
             name: "Call the Hunt",
-            source: ["HB", 0],
+            source: ["DC:WB", 1],
             minlevel: 14,
             description: desc([
                 "As a bonus action while raging, grant myself and up to 10 creatures temporary HP",
