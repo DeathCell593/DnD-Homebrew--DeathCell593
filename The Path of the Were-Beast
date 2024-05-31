@@ -108,8 +108,8 @@ var PathoftheWereBeastSubclassObj = {
                 name: "Were-Beast Form: Crocodile",
                 description: desc([
                     "Swim speed equals walking speed, hold breath 10 minutes longer, bite weapon die increases to 1d10",
-                    "On hit, target is grappled; while raging, advantage on melee attacks against grappled targets"
-                    "While raging, use a bonus action on your turn to make one bite attack"
+                    "On hit, target is grappled; while raging, advantage on melee attacks against grappled targets",
+                    "While raging, use a bonus action on your turn to make one bite attack",
                 ]),
                 action: [["bonus action", " (Unarmed Bite)"]],
                 weaponOptions: {
@@ -122,7 +122,7 @@ var PathoftheWereBeastSubclassObj = {
                     type: "Natural",
                     description: "Target is grappled on a hit, advantage on melee attacks against grappled targets while raging"
                 },
-                weaponsAdd: ["Unarmed Bite"]
+                weaponsAdd: ["Unarmed Bite"],
 		swimSpeed: true,
             },
             "rat": {
@@ -213,35 +213,35 @@ var PathoftheWereBeastSubclassObj = {
     transformation: {
         "Bear": {
             name: "Full Beast Form: Brown Bear",
-            description: "You can transform into a Brown Bear. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the bear's Dexterity score."
+            description: "You can transform into a Brown Bear. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the bear's Dexterity score.",
         },
         "Boar": {
             name: "Full Beast Form: Giant Boar",
-            description: "You can transform into a Giant Boar. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the boar's Dexterity score."
+            description: "You can transform into a Giant Boar. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the boar's Dexterity score.",
         },
         "Cobra": {
             name: "Full Beast Form: Giant Poisonous Snake",
-            description: "You can transform into a Giant Poisonous Snake. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the snake's Dexterity score."
+            description: "You can transform into a Giant Poisonous Snake. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the snake's Dexterity score.",
         },
         "Crocodile": {
             name: "Full Beast Form: Crocodile",
-            description: "You can transform into a Crocodile. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the crocodile's Dexterity score."
+            description: "You can transform into a Crocodile. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the crocodile's Dexterity score.",
         },
         "Rat": {
             name: "Full Beast Form: Giant Badger",
-            description: "You can transform into a Giant Badger. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the badger's Dexterity score."
+            description: "You can transform into a Giant Badger. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the badger's Dexterity score.",
         },
         "Shark": {
             name: "Full Beast Form: Hunter Shark",
-            description: "You can transform into a Hunter Shark. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the shark's Dexterity score."
+            description: "You can transform into a Hunter Shark. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the shark's Dexterity score.",
         },
         "Tiger": {
             name: "Full Beast Form: Tiger",
-            description: "You can transform into a Tiger. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the tiger's Dexterity score."
+            description: "You can transform into a Tiger. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the tiger's Dexterity score.",
         },
         "Wolf": {
             name: "Full Beast Form: Wolf",
-            description: "You can transform into a Wolf. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the wolf's Dexterity score."
+            description: "You can transform into a Wolf. You retain your hit points, AC, ability scores, special senses, and become size Large. For Dexterity (Stealth) checks, use the wolf's Dexterity score.",
         }
     },
     bestialGifts: {
@@ -251,7 +251,7 @@ var PathoftheWereBeastSubclassObj = {
                 "Gain proficiency in Perception or Survival",
                 "Memorize a creature's scent forever by sniffing it for at least 1 minute",
                 "Always recognize the smell of any creature whose scent you've memorized",
-                "Advantage on Wisdom ability checks that rely on taste or smell"
+                "Advantage on Wisdom ability checks that rely on taste or smell",
             ])
         },
         "Lurker Instincts": {
@@ -260,7 +260,7 @@ var PathoftheWereBeastSubclassObj = {
                 "Gain proficiency in Sleight of Hand or Stealth",
                 "Never slow travel pace to move stealthily",
                 "Can perform an activity while traveling without stopping watching for danger",
-                "Gain darkvision that extends to 60 feet"
+                "Gain darkvision that extends to 60 feet",
             ])
         }
     },
