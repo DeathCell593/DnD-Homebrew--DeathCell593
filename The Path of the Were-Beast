@@ -165,14 +165,17 @@ var PathoftheWereBeastSubclassObj = {
                     "While raging, if knock a target prone, can use bonus action to make a bite attack against the target"
                 ]),
                 extraJump: 3,
-                calcChanges: {
-                    atkAdd: [
-                        function (fields, v) {
-                            if (v.isMeleeWeapon && v.thisWeapon[1] === "Tiger") fields.Description += (fields.Description ? '; ' : '') + 'if move 15+ ft straight towards target, target must make Str save or be knocked prone';
-                        },
-                        "If move 15+ ft straight towards target, target must make Str save or be knocked prone"
-                    ]
+                weaponOptions: {
+                    baseWeapon: "unarmed strike",
+                    regExpSearch: /unarmed bite/i,
+                    name: "Unarmed Bite",
+                    source: ["HB", 0],
+                    damage: [1, 4, "piercing"],
+                    ability: 1, // Strength
+                    type: "Natural",
+                    description: "If move 15+ ft straight towards target + attack, target must make Str save or be knocked prone and can use bite"
                 },
+                weaponsAdd: ["Unarmed Bite"]
             },
             "wolf": {
                 name: "Were-Beast Form: Wolf",
