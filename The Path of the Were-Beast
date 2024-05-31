@@ -91,33 +91,39 @@ var PathoftheWereBeastSubclassObj = {
                     "Bite reach increases by 5 ft, target makes Con save on hit or takes 2d4 poison damage",
                     "While raging, can make a bite attack as a bonus action"
                 ]),
-                extraDmg: 2,
-                extraDmgType: "poison",
-                calcChanges: {
-                    atkAdd: [
-                        function (fields, v) {
-                            if (v.isUnarmedStrike) fields.Description += (fields.Description ? '; ' : '') + 'reach +5 ft; target must make Con save or take 2d4 poison damage';
-                        },
-                        "Bite reach increases by 5 ft; target must make Con save or take 2d4 poison damage"
-                    ]
+                action: [["bonus action", " (Unarmed Bite)"]],
+                    weaponOptions: {
+                    baseWeapon: "unarmed strike",
+                    regExpSearch: /unarmed bite/i,
+                    name: "Unarmed Bite",
+                    source: ["HB", 0],
+                    damage: [1, 4, "piercing"],
+                    ability: 1, // Strength
+                    type: "Natural",
+                    description: "Reach +5 ft, target must make a Con save or take 2d4 poison damage on a failure"
                 },
+                weaponsAdd: ["Unarmed Bite"]
             },
             "crocodile": {
                 name: "Were-Beast Form: Crocodile",
                 description: desc([
                     "Swim speed equals walking speed, hold breath 10 minutes longer, bite weapon die increases to 1d10",
                     "On hit, target is grappled; while raging, advantage on melee attacks against grappled targets"
+                    "While raging, use a bonus action on your turn to make one bite attack"
                 ]),
-                swimSpeed: true,
-                extraDmgDie: [1, 10],
-                calcChanges: {
-                    atkAdd: [
-                        function (fields, v) {
-                            if (v.isUnarmedStrike) fields.Description += (fields.Description ? '; ' : '') + '1d10 damage; grapples target on hit';
-                        },
-                        "Bite weapon die increases to 1d10; grapples target on hit"
-                    ]
+                action: [["bonus action", " (Unarmed Bite)"]],
+                weaponOptions: {
+                    baseWeapon: "unarmed strike",
+                    regExpSearch: /unarmed bite/i,
+                    name: "Unarmed Bite",
+                    source: ["HB", 1],
+                    damage: [1, 10, "piercing"],
+                    ability: 1, // Strength
+                    type: "Natural",
+                    description: "Target is grappled on a hit, advantage on melee attacks against grappled targets while raging"
                 },
+                weaponsAdd: ["Unarmed Bite"]
+		swimSpeed: true,
             },
             "rat": {
                 name: "Were-Beast Form: Rat",
