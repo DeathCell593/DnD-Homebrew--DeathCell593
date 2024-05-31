@@ -29,8 +29,6 @@ SourceList["DC:WB"] = {
   date: "2024/05/31",
 };
 
-AddSubClass("barbarian", "Path of the WereBeast", PathoftheWereBeastSubclassObj);
-
 var PathoftheWereBeastSubclassObj = {
   regExpSearch: /^(?=.*(were|beast)).*$/i,
   subname: "Path of the Were-Beast",
@@ -309,3 +307,5 @@ var PathoftheWereBeastSubclassObj = {
         }
     }
 };
+
+AddSubClass("barbarian", "Path of the Were-Beast", PathoftheWereBeastSubclassObj);
